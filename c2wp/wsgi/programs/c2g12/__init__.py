@@ -15,6 +15,7 @@ class C2G12(object):
 <a href="triangle">c2g12 triangle 繪圖</a><br />
 <a href="triangle2">c2g12 triangle2 繪圖</a><br />
 <a href="japan">c2g12 japan 繪圖</a><br />
+<a href="usa">c2g12 usa 繪圖</a><br />
 '''
         return outstring
 
@@ -313,6 +314,57 @@ class C2G12(object):
     ctx.fillRect(0,0,flag_w,flag_h)
     #國旗白底
     ctx.fillStyle='#fff'
+    ctx.fillRect(flag_w/20, flag_h/20, flag_w/1.111, flag_h/1.111)
+    
+    ctx.beginPath()
+    ctx.arc(circle_x, circle_y, flag_w/6, 0, math.pi*2, true)
+    ctx.closePath()
+    # 填色設為紅色
+    ctx.fillStyle = 'rgb(255, 0, 0)'
+    ctx.fill()
+    </script>
+    </body>
+    </html>
+    '''
+        return outstring
+
+    @cherrypy.expose
+    def usa(self, *args, **kwargs):
+        '''
+        原始程式來源: http://blog.roodo.com/esabear/archives/19215194.html
+        改寫為 Brython 程式
+        '''
+        outstring = '''
+    <!DOCTYPE html> 
+    <html>
+    <head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <script type="text/javascript" src="/static/Brython2.1.0-20140419-113919/brython.js"></script>
+    </head>
+    <body onload="brython({debug:1, cache:'version'})">
+    <canvas id="plotarea" width="300" height="200"></canvas>
+    <script type="text/python">
+    # 導入 doc
+    from browser import doc
+    import math
+
+    # 準備繪圖畫布
+    canvas = doc["plotarea"]
+    ctx = canvas.getContext("2d")
+    # 進行座標轉換, x 軸不變, y 軸反向且移動 canvas.height 單位光點
+    # ctx.setTransform(1, 0, 0, -1, 0, canvas.height)
+    # 以下採用 canvas 原始座標繪圖
+    flag_w = canvas.width
+    flag_h = canvas.height
+    square_x = flag_w/2
+    square_y = flag_h/2
+    circle_x = flag_w/2
+    circle_y = flag_h/2
+    #黑色邊框
+    ctx.fillStyle='rbg(0, 0, 0)'
+    ctx.fillRect(0,0,flag_w,flag_h)
+    #國旗白底
+    ctx.fillStyle='rbg(255, 0, 0)'
     ctx.fillRect(flag_w/20, flag_h/20, flag_w/1.111, flag_h/1.111)
     
     ctx.beginPath()
